@@ -7,3 +7,5 @@ debian/ruby-escper
 *.log
 files
 *.substvars
+
+.DS_Store

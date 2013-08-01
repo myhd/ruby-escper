@@ -57,11 +57,11 @@ module Escper
       result = bits.collect{ |b| b.chr }.join
       escpos = ''
       escpos.encode! 'ASCII-8BIT'
-      escpos += "\x1D\x76\x30\x00" +
+      escpos += "\x1D\x76\x30\x00" + # "obsolete" print command
           @x.chr +
           "\x00" +
-          (@y*8).chr +
-          "\x00" +
+          ((@y.to_i*8)%256).chr + # y size is in bits. this is the LOW bit
+          ((@y.to_i*8)/256).chr + # this is the HIGH bit     
           result
       return escpos
     end
